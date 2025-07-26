@@ -11,8 +11,8 @@ class Carta{
     this.naipe = naipe;
     this.valor = valor;
   }
-
-  getPeso():number{
+  // Método get para analise de peso da carta
+  /*getPeso():number{
     switch(this.valor){
       case 'A': return 15;
       case '2': return 2;
@@ -29,6 +29,12 @@ class Carta{
       case 'K': return 10;
     }
     throw new Error('Valor inválido');
-  }
+  }*/
 
+  // Melhoria do get
+ // Basicamente getPeso agora pega o proprio valor da carta e converte para o seu peso no formato de inteiro(number);
+ getPeso(): number{
+  if(['J', 'Q', 'K'].includes(this.valor)) return 10;
+  if(this.valor === 'A') return 15;
+  return parseInt(this.valor);
 }
