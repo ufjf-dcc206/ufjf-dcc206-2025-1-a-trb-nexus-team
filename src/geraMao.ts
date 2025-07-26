@@ -16,13 +16,16 @@ class Mao{
         const naipes: Naipe[] = ['♠', '♥', '♦', '♣'];
         const valores: Valor[] = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
-        for(let i = 0; i< this.TamanhoMao; i++){
+        /*for(let i = 0; i< this.TamanhoMao; i++){
             const naipe = naipes[Math.floor(Math.random() * naipes.length)];
             const valor = valores[Math.floor(Math.random() * valores.length)];
             const carta = new Carta(naipe, valor);
             this.mao.push(carta);
 
-        }
+        }*/
+
+        // Criando um baralho para evitar a questão da duplicação de cartas
+        
     }
 }
 
