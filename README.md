@@ -29,4 +29,4 @@ Para vencer uma rodada, deve atingir um número de pontos do desafio começando 
 Se o jogador não somar o número total de pontos depois de jogar as disponíveis, ele é derrotado: mão = 0 &&  total de pontos < limite da pontuação ? perdeu : ganhou;
 A cada nova rodada os pontos necessários dobram. de 100 a cada nova rodada x2;
 Você pode adicionar novas regras desde que não contradizem as anteriores sem um bom motivo.(não grita)
-Não precisa de multiplicadores, apenas pontos.
+Não precisa de multiplicadores coringas, apenas pontos em relação as mãos feitas.
