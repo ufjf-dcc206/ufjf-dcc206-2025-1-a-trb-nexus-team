@@ -3,7 +3,7 @@ export type Naipe = '♠' | '♥' | '♦' | '♣';
 export type Valor = 'A' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | 'J' | 'Q' | 'K';
 
 // criação da classe Carta e seus métodos
-class Carta{
+export class Carta{
  // atributos padrões da classe em forma privada
     private naipe: Naipe;
     private valor: Valor;
@@ -34,7 +34,7 @@ class Carta{
   // Melhoria do get
  // Basicamente getPeso agora pega o proprio valor da carta e converte para o seu peso no formato de inteiro(number);
  
-    getPeso(): number{
+    get Peso(): number{
         if(['J', 'Q', 'K'].includes(this.valor)) return 10;
         if(this.valor === 'A') return 15;
         return parseInt(this.valor);
@@ -42,7 +42,7 @@ class Carta{
 
     //mostra a carta via console 
     mostrarCarta(): void {
-        console.log(`${this.valor}${this.naipe} ${this.getPeso()}`); 
+        console.log(`${this.valor}${this.naipe} ${this.Peso}`); 
     }
 
 
