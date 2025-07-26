@@ -3,7 +3,7 @@ import type { Naipe, Valor } from "./carta";
 
 class Mao{
     private mao: Carta[];
-    private tamanho_mao = 5;
+    private tamanho_mao = 8;
     constructor(){
         this.mao = [];
     }
