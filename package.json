@@ -1,12 +1,35 @@
 {
   "name": "ufjf-dcc206-2025-1-a-trb-nexus-team",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
+  "description": "[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/Fq80rDCH)",
+  "homepage": "https://github.com/ufjf-dcc206/ufjf-dcc206-2025-1-a-trb-nexus-team#readme",
+  "bugs": {
+    "url": "https://github.com/ufjf-dcc206/ufjf-dcc206-2025-1-a-trb-nexus-team/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ufjf-dcc206/ufjf-dcc206-2025-1-a-trb-nexus-team.git"
+  },
+  "license": "ISC",
+  "author": "",
   "type": "module",
+  "main": "index.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
+  },
+  "dependencies": {
+    "esbuild": "^0.25.8",
+    "fdir": "^6.4.6",
+    "nanoid": "^3.3.11",
+    "picocolors": "^1.1.1",
+    "picomatch": "^4.0.3",
+    "postcss": "^8.5.6",
+    "rollup": "^4.45.1",
+    "source-map-js": "^1.2.1",
+    "tinyglobby": "^0.2.14"
   },
   "devDependencies": {
     "typescript": "~5.8.3",
