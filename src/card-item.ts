@@ -10,7 +10,7 @@ export class CardItem extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["valor", "naipe", "selected"];
+    return ["valor", "naipe"];
   }
 
   attributeChangedCallback() {
@@ -18,61 +18,50 @@ export class CardItem extends HTMLElement {
   }
 
   connectedCallback() {
-    this.addEventListener("click", this.toggleSelection.bind(this));
+    this.addEventListener("click", this.toggleSelect.bind(this));
   }
 
-  disconnectedCallback() {
-    this.removeEventListener("click", this.toggleSelection.bind(this));
+  private toggleSelect() {
+    const index = this.getAttribute("index");
+    const event = new CustomEvent("card-toggle", {
+      detail: { index: Number(index), selected: !this.selected },
+      bubbles: true,
+      composed: true
+    });
+    this.dispatchEvent(event);
   }
 
-  private toggleSelection() {
-    this.selected = !this.selected;
-    this.setAttribute("selected", this.selected.toString());
-
-    // Dispara evento para o componente pai (game-container)
-    this.dispatchEvent(
-      new CustomEvent("card-toggle", {
-        detail: { index: this.getAttribute("index") },
-        bubbles: true, // Permite que o evento suba até game-container
-        composed: true,
-      })
-    );
+  public setSelected(state: boolean) {
+    this.selected = state;
+    this.render();
   }
 
   private render() {
     const valor = this.getAttribute("valor") || "";
     const naipe = this.getAttribute("naipe") || "";
-    const selected = this.hasAttribute("selected") && this.getAttribute("selected") === "true";
 
     this.shadow.innerHTML = `
       <style>
         .card {
           width: 60px;
-          height: 80px;
+          height: 90px;
+          border: 2px solid ${this.selected ? "blue" : "#333"};
+          border-radius: 8px;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          border: 2px solid #333;
-          border-radius: 8px;
-          background: ${selected ? "#f9e65d" : "#fff"};
-          cursor: pointer;
+          background: white;
           font-size: 18px;
           font-weight: bold;
+          cursor: pointer;
           user-select: none;
         }
-        .naipe {
-          font-size: 16px;
-        }
       </style>
-      <div class="card">
-        <div>${valor}</div>
-        <div class="naipe">${naipe}</div>
-      </div>
+      <div class="card">${valor}<br>${naipe}</div>
     `;
   }
 }
 
-// Registra o componente
 customElements.define("card-item", CardItem);
 
