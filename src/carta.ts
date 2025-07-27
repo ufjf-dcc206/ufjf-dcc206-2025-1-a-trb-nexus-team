@@ -45,7 +45,7 @@ export class Carta {
 
   //mostra a carta via console
   mostrarCarta(): void {
-    console.log(`´${this.valor}${this.naipe} ${this.Peso}`);
+    console.log(`${this.valor}${this.naipe} ${this.Peso}`);
   }
 }
 
