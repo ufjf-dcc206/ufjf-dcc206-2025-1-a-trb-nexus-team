@@ -49,3 +49,5 @@ export default class Acoes extends HTMLElement {
     );
   }
 }
+
+customElements.define("ice-acoes", Acoes);
