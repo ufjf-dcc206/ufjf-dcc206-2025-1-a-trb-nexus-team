@@ -3,6 +3,8 @@ import { Baralho } from "./baralho.js";
 import type { Naipe, Valor } from "./carta.js";
 import { Mao } from "./mao.js";
 
+// segundo nossa pesquisa por fora o Record se assemelha a um dicionario
+export type dicionario = Record<string, number>;
 
 //administra o jogo, controla as rodadas, pontuação e interações do jogador
 export class GerenciadorJogo {
@@ -79,12 +81,12 @@ export class GerenciadorJogo {
             return;
         }
 
-        //fazer a contagem de pontos
+        // contagem de pontos
         const pontos = this.calcularPontuacao(jogadas);
         this.pontuacao += pontos;
         this.num_jogadas_restante--;
         console.log(`Você jogou ${jogadas.length} cartas e ganhou ${pontos} pontos.`);
-        //fazer a verificação de resultado
+        //verificação de resultado
         this.verificarResultado();
         this.mostrarStatus();
     }
@@ -108,5 +110,69 @@ export class GerenciadorJogo {
         this.num_descartes_restante--;
         console.log(`Você descartou ${descartes.length} cartas.`);
         this.mostrarStatus();
+    }
+
+    private verificarResultado(): void {
+        // Verifica se a pontuação atingiu ou ultrapassou a meta
+        if (this.pontuacao >= this.meta) {
+            console.log(`Parabéns! Você alcançou a meta de ${this.meta} pontos!`);
+            this.novaRodada();
+        } else if (this.num_jogadas_restante === 0) {
+            console.log("Fim da rodada. Você não atingiu a meta.");
+            this.novaRodada();
+        }
+    }
+
+    private identificarCombos(cartas: Carta[]): { nome: string, multiplicador: number } {
+        // Identificar se é carta alta(maior carta), par, dois pares, trinca, full house, flush, quadra tem a possibilidade de ter uma carta que não fa parte de nenhum
+        // combo logica do balatro
+        const valores = cartas.map(carta => carta.Valor);
+        const naipes = cartas.map(carta => carta.Naipe);
+
+        const contagemValores: dicionario = {};
+
+        //similar um enumerate em python
+        for (const valor of valores) {
+            //conta quantas vezes cada valor aparece
+            contagemValores[valor] = (contagemValores[valor] || 0) + 1;
+        }
+
+        //pega o valor das cartas e coloca de forma decrescente
+        const quantidade = Object.values(contagemValores).sort((a,b) => b-a);
+        //verifica se tem par, dois pares, trinca, quadra, full house e flush por meio do includes que praticamente verifica se o valor existe no array e se é
+        //na quantidade correspondente sendo booleanos
+        const temPar : boolean = quantidade.includes(2);
+        const temDoisPares : boolean = quantidade.filter(q => q === 2).length === 2;
+        const temTrinca : boolean = quantidade.includes(3);
+        const temQuadra : boolean = quantidade.includes(4);
+        const temFullHouse : boolean = temTrinca && temPar;
+        //verifica se o naipe inicial é o mesmo de todos os outros
+        const temFlush : boolean = naipes.every(naipe => naipe === naipes[0]);
+
+        //condicional dos booleanos com seus retornos.
+        if(temPar){
+            return { nome: "Par", multiplicador: 2 };
+        }
+        if(temDoisPares){
+            return { nome: "Dois Pares", multiplicador: 2 };
+        }
+        if(temTrinca){
+            return { nome: "Trinca", multiplicador: 3 };
+        }
+        if(temFullHouse){
+            return { nome: "Full House", multiplicador: 6 };
+        }
+        if(temQuadra){
+            return { nome: "Quadra", multiplicador: 8 };
+        }
+        if(temFlush){
+            return { nome: "Flush", multiplicador: 5 };
+        }
+        return { nome: "Carta Alta", multiplicador: 1 };
+    }
+
+    private calcularPontuacao(cartas: Carta[]): number {
+        const combos = this.identificarCombos(cartas);
+        
     }
 }
