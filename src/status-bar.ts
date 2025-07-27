@@ -1,4 +1,4 @@
-// src/components/status-bar.ts
+
 export class StatusBar extends HTMLElement {
   private shadow: ShadowRoot;
 
@@ -9,7 +9,7 @@ export class StatusBar extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["rodada", "meta", "pontuacao", "jogadas", "descartes", "combo", "multiplicador"];
+    return ["rodada", "meta", "pontuacao", "jogadas", "descartes"];
   }
 
   attributeChangedCallback() {
@@ -22,10 +22,6 @@ export class StatusBar extends HTMLElement {
     const pontuacao = this.getAttribute("pontuacao") || "0";
     const jogadas = this.getAttribute("jogadas") || "0";
     const descartes = this.getAttribute("descartes") || "0";
-
-    // 🔍 Novos atributos
-    const combo = this.getAttribute("combo") || "-";
-    const multiplicador = this.getAttribute("multiplicador") || "-";
 
     this.shadow.innerHTML = `
       <style>
@@ -44,12 +40,6 @@ export class StatusBar extends HTMLElement {
         .status-item {
           font-weight: bold;
         }
-        .combo-info {
-          grid-column: span 2;
-          font-size: 14px;
-          color: #444;
-          text-align: center;
-        }
       </style>
       <div class="status-container">
         <div class="status-item">Rodada: ${rodada}</div>
@@ -57,9 +47,13 @@ export class StatusBar extends HTMLElement {
         <div class="status-item">Pontuação: ${pontuacao}</div>
         <div class="status-item">Jogadas: ${jogadas}</div>
         <div class="status-item">Descartes: ${descartes}</div>
-        <div class="combo-info">Último Combo: ${combo} (x${multiplicador})</div>
       </div>
     `;
+  }
+}
+
+customElements.define("status-bar", StatusBar);
+
   }
 }
 
