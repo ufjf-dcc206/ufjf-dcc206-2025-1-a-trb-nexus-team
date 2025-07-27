@@ -119,7 +119,12 @@ export class GerenciadorJogo {
             this.novaRodada();
         } else if (this.num_jogadas_restante === 0) {
             console.log("Fim da rodada. Você não atingiu a meta.");
-            this.novaRodada();
+            this.rodada_atual = 0;
+            this.num_jogadas_restante = 4;
+            this.num_descartes_restante = 3;
+            this.meta = 100;
+            this.pontuacao = 0;
+            this.iniciarJogo();
         }
     }
 
@@ -172,7 +177,11 @@ export class GerenciadorJogo {
     }
 
     private calcularPontuacao(cartas: Carta[]): number {
-        const combos = this.identificarCombos(cartas);
-        
+        const { nome, multiplicador } = this.identificarCombos(cartas);
+        const soma = cartas.reduce((acc, carta) => acc + carta.Peso, 0);
+        const pontos = soma * multiplicador;
+        console.log(` Soma:${soma} Multiplicador: ${multiplicador}`);
+        console.log(`Combo: ${nome}, Pontos: ${pontos}`);
+        return pontos;
     }
 }
