@@ -1,6 +1,6 @@
 import { Carta } from "./carta.js";
 import { Baralho } from "./baralho.js";
-import type { Naipe, Valor } from "./carta.js";
+//import type { Naipe, Valor } from "./carta.js";
 import { Mao } from "./mao.js";
 
 // segundo nossa pesquisa por fora o Record se assemelha a um dicionario
@@ -11,22 +11,7 @@ export class GerenciadorJogo {
     private num_jogadas_restante: number = 4;
     private num_descartes_restante : number = 3;
     private meta : number = 100;
-    private naipe: Naipe[] = ["♠", "♥", "♦", "♣"];
-    private valor: Valor[] = [
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "J",
-        "Q",
-        "K",
-        "A",
-    ];
+
     private rodada_atual: number = 1;
     private pontuacao: number = 0;
     private mao: Mao;
@@ -51,6 +36,29 @@ export class GerenciadorJogo {
         console.log(`Meta: ${this.meta}`);
         console.log(`Pontuação atual: ${this.pontuacao}`);
         this.mao.mostrarMao();
+        console.log("Selecione as cartas para jogar ou descartar.");
+        const entrada = prompt();
+        this.processarEntrada(entrada);
+    }
+    private processarEntrada(entrada: string | null): void {
+        if (!entrada) {
+            console.log("Entrada inválida. Tente novamente.");
+            return;
+        }
+
+        const indices = entrada.split(",").map(Number);
+        indices.forEach(indice => this.mao.selecionarCarta(indice));
+        this.mao.mostrarMao();
+        console.log("Digite 'jogar' para jogar as cartas selecionadas ou 'descartar' para descartar.");
+        
+        const acao = prompt();
+        if (acao === "jogar") {
+            this.jogar();
+        } else if (acao === "descartar") {
+            this.descartar();
+        } else {
+            console.log("Ação inválida. Tente novamente.");
+        }
     }
 
     public novaRodada(): void {
@@ -185,3 +193,7 @@ export class GerenciadorJogo {
         return pontos;
     }
 }
+
+// Teste inicial
+const gerenciador = new GerenciadorJogo();
+gerenciador.iniciarJogo();
