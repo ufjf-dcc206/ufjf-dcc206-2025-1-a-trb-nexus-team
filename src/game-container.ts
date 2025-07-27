@@ -1,5 +1,6 @@
 // game-container.ts
-import { GerenciadorJogo } from "./gerenciadorJogo.js"; // Importando o back-end
+import { GerenciadorJogo } from "./gerenciadorJogo.ts"; // Importando o back-end
+import "./card-item.ts"; // Importando o componente de carta
 
 export class GameContainer extends HTMLElement {
   private shadow: ShadowRoot;
@@ -92,38 +93,36 @@ export class GameContainer extends HTMLElement {
     handView.innerHTML = "";
     const mao = this.gerenciador["mao"].MaoDoBaralho;
     mao.forEach((carta, index) => {
-      const div = document.createElement("div");
-      div.classList.add("card");
-      div.textContent = `${carta.Valor}${carta.Naipe}`;
-      div.dataset.index = index.toString();
-      handView.appendChild(div);
+      const cardEl = document.createElement("card-item");
+        cardEl.setAttribute("valor", carta.Valor);
+        cardEl.setAttribute("naipe", carta.Naipe);
+        cardEl.setAttribute("index", index.toString());
+        handView.appendChild(cardEl);
+      
     });
   }
 
-  private addEventListeners() {
-    const handView = this.shadow.querySelector(".hand-view") as HTMLDivElement;
-    handView.addEventListener("click", (event) => {
-      const target = event.target as HTMLElement;
-      if (target.classList.contains("card")) {
-        const index = parseInt(target.dataset.index || "0");
-        this.gerenciador["mao"].selecionarCarta(index);
-        target.classList.toggle("selected");
-      }
-    });
+private addEventListeners() {
+  const handView = this.shadow.querySelector(".hand-view") as HTMLDivElement;
 
-    const playBtn = this.shadow.querySelector("#play-btn") as HTMLButtonElement;
-    playBtn.addEventListener("click", () => {
-      this.gerenciador.jogar();
-      this.updateUI();
-    });
+  handView.addEventListener("card-toggle", (event: Event) => {
+    const customEvent = event as CustomEvent;
+    const index = parseInt(customEvent.detail.index);
+    this.gerenciador["mao"].selecionarCarta(index);
+  });
 
-    const discardBtn = this.shadow.querySelector("#discard-btn") as HTMLButtonElement;
-    discardBtn.addEventListener("click", () => {
-      this.gerenciador.descartar();
-      this.updateUI();
-    });
-  }
+  const playBtn = this.shadow.querySelector("#play-btn") as HTMLButtonElement;
+  playBtn.addEventListener("click", () => {
+    this.gerenciador.jogar();
+    this.updateUI();
+  });
+
+  const discardBtn = this.shadow.querySelector("#discard-btn") as HTMLButtonElement;
+  discardBtn.addEventListener("click", () => {
+    this.gerenciador.descartar();
+    this.updateUI();
+  });
 }
-
+}
 // Registra o componente para uso no HTML
 customElements.define("game-container", GameContainer);
