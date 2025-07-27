@@ -160,26 +160,26 @@ export class GerenciadorJogo {
         const temQuadra : boolean = quantidade.includes(4);
         const temFullHouse : boolean = temTrinca && temPar;
         //verifica se o naipe inicial é o mesmo de todos os outros
-        const temFlush : boolean = naipes.every(naipe => naipe === naipes[0]);
+        const temFlush : boolean = naipes.every(naipe => naipe === naipes[0] && naipes.length === 5);
 
         //condicional dos booleanos com seus retornos.
-        if(temPar){
-            return { nome: "Par", multiplicador: 2 };
-        }
-        if(temDoisPares){
-            return { nome: "Dois Pares", multiplicador: 2 };
-        }
-        if(temTrinca){
-            return { nome: "Trinca", multiplicador: 3 };
+        if(temQuadra){
+            return { nome: "Quadra", multiplicador: 8 };
         }
         if(temFullHouse){
             return { nome: "Full House", multiplicador: 6 };
         }
-        if(temQuadra){
-            return { nome: "Quadra", multiplicador: 8 };
-        }
         if(temFlush){
             return { nome: "Flush", multiplicador: 5 };
+        }
+        if(temTrinca){
+            return { nome: "Trinca", multiplicador: 3 };
+        }
+        if(temDoisPares){
+            return { nome: "Dois Pares", multiplicador: 2 };
+        }
+        if(temPar){
+            return { nome: "Par", multiplicador: 2 };
         }
         return { nome: "Carta Alta", multiplicador: 1 };
     }
