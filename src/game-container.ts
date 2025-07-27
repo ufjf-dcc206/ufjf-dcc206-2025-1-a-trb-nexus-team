@@ -23,40 +23,54 @@ export class GameContainer extends HTMLElement {
   }
 
   private render() {
-    this.shadow.innerHTML = `
-  <style>
-    .game-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    .hand-view {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 15px;
-    }
-    .action-buttons {
-      display: flex;
-      gap: 10px;
-    }
-    button {
-      padding: 10px 15px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-  </style>
-  <div class="game-container">
-    <status-bar></status-bar>
-    <div class="hand-view"></div>
-    <div class="action-buttons">
-      <button id="play-btn">Jogar</button>
-      <button id="discard-btn">Descartar</button>
+  this.shadow.innerHTML = `
+    <style>
+      .game-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      .hand-view {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+      }
+      .action-buttons {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+      button {
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .message-box {
+        min-height: 40px;
+        padding: 10px;
+        background: #eee;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 300px;
+        text-align: center;
+        font-weight: bold;
+      }
+    </style>
+    <div class="game-container">
+      <status-bar></status-bar>
+      <div class="hand-view"></div>
+      <div class="action-buttons">
+        <button id="play-btn">Jogar</button>
+        <button id="discard-btn">Descartar</button>
+      </div>
+      <div class="message-box">Bem-vindo ao jogo!</div>
     </div>
-  </div>
-`;
+  `;
+}
+
 
   }
 
