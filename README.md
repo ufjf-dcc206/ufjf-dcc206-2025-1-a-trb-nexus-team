@@ -30,3 +30,9 @@ Se o jogador não somar o número total de pontos depois de jogar as disponívei
 A cada nova rodada os pontos necessários dobram. de 100 a cada nova rodada x2;
 Você pode adicionar novas regras desde que não contradizem as anteriores sem um bom motivo.(não grita)
 Não precisa de multiplicadores coringas, apenas pontos em relação as mãos feitas.
+
+
+Planejamento da visualização:
+
+ideia de plano de fundo
+![Inicio do sonho](imagem_conceitual/plano_visual_do_jogo_icelatro.png)
