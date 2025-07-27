@@ -1,8 +1,8 @@
-import { GerenciadorJogo } from "./gerenciadorJogo";
-import "./acoes";
-import "./cabecalho";
-import "./status";
-import "./mao_baralho";
+import { GerenciadorJogo } from "./gerenciadorJogo.ts";
+import "./acoes.ts";
+import "./cabecalho.ts";
+import "./status.ts";
+import "./mao_baralho.ts";
 
 export default class IceGame extends HTMLElement {
     private gerenciadorJogo: GerenciadorJogo;

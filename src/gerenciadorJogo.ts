@@ -1,7 +1,7 @@
-import { Carta } from "./carta.js";
-import { Baralho } from "./baralho.js";
+import { Carta } from "./carta.ts";
+import { Baralho } from "./baralho.ts";
 //import type { Naipe, Valor } from "./carta.js";
-import { Mao } from "./mao.js";
+import { Mao } from "./mao.ts";
 
 // segundo nossa pesquisa por fora o Record se assemelha a um dicionario
 export type dicionario = Record<string, number>;
