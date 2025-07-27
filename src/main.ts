@@ -1,7 +1,7 @@
 import './style.css'
-import typescriptLogo from './typescript.svg'
+/*import typescriptLogo from './typescript.svg'
 import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import { setupCounter } from './counter.ts'*/
 
 /*document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
@@ -24,4 +24,5 @@ import { setupCounter } from './counter.ts'
 setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
 console.log('Hello world!');*/
 
-//um exportação do tipo naipe e valor
+import "./icegame.ts"
+

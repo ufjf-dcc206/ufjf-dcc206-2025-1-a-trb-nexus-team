@@ -28,10 +28,21 @@ export class GerenciadorJogo {
         this.mostrarStatus();
     }
 
+    get meta_visual(): number {
+        return this.meta;
+    }
+    
+    get jogadas_restantes(): number {
+        return this.num_jogadas_restante;
+    }
+
+    get descartes_restantes(): number {
+        return this.num_descartes_restante;
+    }
     public mostrarStatus(): void {
         //hub do jogo
         console.log(`Rodada: ${this.rodada_atual}`);
-        console.log(`Jogadas restantes: ${this.num_jogadas_restante}`);
+        console.log(`Jogadas restantes: ${this.jogadas_restantes}`);
         console.log(`Descartes restantes: ${this.num_descartes_restante}`);
         console.log(`Meta: ${this.meta}`);
         console.log(`Pontuação atual: ${this.pontuacao}`);
@@ -195,5 +206,4 @@ export class GerenciadorJogo {
 }
 
 // Teste inicial
-const gerenciador = new GerenciadorJogo();
-gerenciador.iniciarJogo();
+
