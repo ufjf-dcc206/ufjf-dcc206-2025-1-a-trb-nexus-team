@@ -50,5 +50,3 @@ export class Carta {
 }
 
 //teste inicial
-const carta1 = new Carta("A", "♠");
-carta1.mostrarCarta();
