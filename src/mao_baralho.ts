@@ -35,7 +35,7 @@ export class MaoBaralho extends HTMLElement {
     `;
     }
 
-    atualizar(cartas:{valor:string; naipe:string}[]){
+    public atualizar(cartas:{valor:string; naipe:string}[]){
         const container = this.shadowRoot!.getElementById("hand");
         container!.innerHTML = ""; // Limpa o container antes de colocar novas cartas
         cartas.forEach((carta, index) => {
