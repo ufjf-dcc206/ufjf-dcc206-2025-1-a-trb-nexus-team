@@ -1,3 +1,4 @@
+
 export class CardItem extends HTMLElement {
   private shadow: ShadowRoot;
   private selected: boolean = false;
@@ -74,3 +75,4 @@ export class CardItem extends HTMLElement {
 
 // Registra o componente
 customElements.define("card-item", CardItem);
+
