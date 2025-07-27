@@ -1,4 +1,4 @@
-// game-container.ts
+
 import { GerenciadorJogo } from "./gerenciadorJogo.js"; // Importando o back-end
 
 export class GameContainer extends HTMLElement {
@@ -24,80 +24,64 @@ export class GameContainer extends HTMLElement {
 
   private render() {
     this.shadow.innerHTML = `
-      <style>
-        .game-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          font-family: Arial, sans-serif;
-          padding: 20px;
-        }
-        .status-bar {
-          margin-bottom: 15px;
-          font-size: 18px;
-        }
-        .hand-view {
-          display: flex;
-          gap: 10px;
-          flex-wrap: wrap;
-          margin-bottom: 15px;
-        }
-        .card {
-          border: 1px solid #333;
-          border-radius: 8px;
-          padding: 10px;
-          width: 50px;
-          text-align: center;
-          cursor: pointer;
-          background: white;
-          user-select: none;
-        }
-        .card.selected {
-          background: yellow;
-        }
-        .action-buttons {
-          display: flex;
-          gap: 10px;
-        }
-        button {
-          padding: 10px 15px;
-          cursor: pointer;
-          font-size: 16px;
-        }
-      </style>
-      <div class="game-container">
-        <div class="status-bar"></div>
-        <div class="hand-view"></div>
-        <div class="action-buttons">
-          <button id="play-btn">Jogar</button>
-          <button id="discard-btn">Descartar</button>
-        </div>
-      </div>
-    `;
+  <style>
+    .game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .hand-view {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    button {
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
+  <div class="game-container">
+    <status-bar></status-bar>
+    <div class="hand-view"></div>
+    <div class="action-buttons">
+      <button id="play-btn">Jogar</button>
+      <button id="discard-btn">Descartar</button>
+    </div>
+  </div>
+`;
+
   }
 
   // Atualiza os dados exibidos na UI
   private updateUI() {
-    const statusBar = this.shadow.querySelector(".status-bar") as HTMLDivElement;
-    statusBar.innerHTML = `
-      <div>Rodada: ${this.gerenciador["rodada_atual"]}</div>
-      <div>Meta: ${this.gerenciador.meta_visual}</div>
-      <div>Pontuação: ${this.gerenciador["pontuacao"]}</div>
-      <div>Jogadas restantes: ${this.gerenciador.jogadas_restantes}</div>
-      <div>Descartes restantes: ${this.gerenciador.descartes_restantes}</div>
-    `;
+  const status = this.shadow.querySelector("status-bar") as HTMLElement;
+  status.setAttribute("rodada", this.gerenciador["rodada_atual"].toString());
+  status.setAttribute("meta", this.gerenciador.meta_visual.toString());
+  status.setAttribute("pontuacao", this.gerenciador["pontuacao"].toString());
+  status.setAttribute("jogadas", this.gerenciador.jogadas_restantes.toString());
+  status.setAttribute("descartes", this.gerenciador.descartes_restantes.toString());
 
-    // Renderiza as cartas da mão
-    const handView = this.shadow.querySelector(".hand-view") as HTMLDivElement;
-    handView.innerHTML = "";
-    const mao = this.gerenciador["mao"].MaoDoBaralho;
-    mao.forEach((carta, index) => {
+  const handView = this.shadow.querySelector(".hand-view") as HTMLDivElement;
+  handView.innerHTML = "";
+  const mao = this.gerenciador["mao"].MaoDoBaralho;
+
+  mao.forEach((carta, index) => {
     const cardEl = document.createElement("card-item");
     cardEl.setAttribute("valor", carta.Valor);
     cardEl.setAttribute("naipe", carta.Naipe);
     cardEl.setAttribute("index", index.toString());
     handView.appendChild(cardEl);
   });
+}
+
   }
 
   private addEventListeners() {
