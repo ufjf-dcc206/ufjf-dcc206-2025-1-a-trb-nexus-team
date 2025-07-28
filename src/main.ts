@@ -1,5 +1,8 @@
-import "./game-container.ts";
-import "./card-item.ts"; 
+import { GerenciadorJogo } from "./gerenciadorJogo.js";
+
+const jogo = new GerenciadorJogo();
+
+jogo.iniciarJogo();
 
 
 
